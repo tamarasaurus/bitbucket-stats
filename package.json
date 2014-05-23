@@ -1,0 +1,14 @@
+{
+  "name": "bitbucket-stats",
+  "version": "0.0.0",
+  "description": "Stats for bitbucket repositories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tamara Chahine",
+  "license": "ISC",
+  "dependencies": {
+    "unirest": "^0.2.7"
+  }
+}
