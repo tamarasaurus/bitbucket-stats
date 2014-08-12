@@ -1,18 +1,24 @@
-  var bitbucket = require('bitbucket-rest');                                            
-  var client = bitbucket.connectClient({username : 'username', password : 'password'});
-  var unirest = require('unirest');
+var bitbucket = require('bitbucket-rest');
+var config = require('./config');
+var client = bitbucket.connectClient(config);
 
-  client.getRepoDetails({owner:'owner', repo_slug : 'slug'}, function(res){
-  	console.log(res.data.links.commits.href);
+// install diff parser
+module.exports = (function() {
+	var stats = function() {};
 
-  	unirest.get(res.data.links.commits.href).auth({
-  	  user: 'user',
-  	  pass: 'password',
-  	  sendImmediately: true
-  	}).end(function(r){
-  		console.info('request success')
-  		console.info(r.body);
+	stats.prototype = {
+		getRepoDetails: function(params, cb) {
+			client.getRepoDetails({
+				owner: params.owner,
+				repo_slug: params.slug
+			}, function(res) {
+				cb.call(null, res);
+			});
+		},
+        getCommitDetails: function(href){
 
-  	});
-  
-  });
+        }
+	};
+
+	return stats;
+}());
